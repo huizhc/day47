@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/command.js"></script>
+    <script src="./js/time.js"></script>
+    <script src="./js/class.js"></script>
+    <script src="./app.js"></script>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    ul li{
+        list-style-type: none;
+    }
+    header {
+        /* border: 1px solid red; */
+        height: 197px;
+    }
+    article {
+        /* border: 1px solid red; */
+        min-width: 900px;
+        height: 255px;
+    }
+    .left {
+        float: left;
+    }
+    .right {
+        float: right;
+    }
+    /* 厨房 */
+    #cookWr {
+        /* border: 1px solid red; */
+        width: 95px;
+        height: 255px;
+        text-align: center;
+    }
+    /* 用餐区 */
+    #custWr {
+        /* border: 1px solid red; */
+        width: 500px;
+        height: 255px;
+        text-align: center;
+    }
+    /* 桌子 */
+    #zhuoWr {
+        width: 500px;
+        margin-left: 70px;
+    }
+    /* 过道(服务员站立区) */
+    #waiterWr {
+        width: 500px;
+        transition: .5s all;
+    }
+    /* 正在做的菜 */
+    .zaizuo {
+        color: green;
+    }
+    /* 服务员到顾客所在位置 */
+    .waiterRi {
+        position: relative;
+        left: 70px;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>这是一个半成品，做不动了。。</h1>
+        <h2>现金</h2>
+        <p>￥<span id="money"></span></p>
+        <button onclick="ceshi(event)">测试</button>
+    </header>
+    <article>
+        <div id="cookWr" class="left"></div>
+        <div id="custWr" class="left">
+            <div id="zhuoWr" class="left"></div>
+            <div id="waiterWr" class="left"></div>
+        </div>
+    </article>
+    <footer>
+    </footer>
+    <script>
+        //测试代码
+    function ceshi (event) {
+        event.target.disabled = true;
+        console.log('开始测试')
+        let custList = [
+            new Customer(),
+            new Customer(),
+            new Customer()
+        ];
+        // prList(custList.map((el) => {
+        //     return [el.diancai];
+        // }))
+        let pm = Promise.resolve();
+        for (let i = 0; i < custList.length; i ++) {
+            pm = pm.then(() => {
+                return custList[i].diancai();
+            })
+        }
+        pm.then(() => {
+            console.log('测试完成');
+            event.target.disabled = false;
+        })
+    }
+    </script>
+</body>
+</html>
